@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "sdl_image.h": "c",
+        "cctype": "c",
+        "cfloat": "c",
+        "cmath": "c",
+        "cstdarg": "c",
+        "cstdio": "c",
+        "cstdlib": "c",
+        "cwchar": "c",
+        "type_traits": "c",
+        "limits": "c",
+        "*.tcc": "c",
+        "cinttypes": "c",
+        "cstdbool": "c",
+        "cstdint": "c",
+        "typeinfo": "c"
+    }
+}

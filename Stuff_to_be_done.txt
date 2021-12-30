@@ -1,0 +1,9 @@
+Stuff that needs to be done:
+-load image specified by args, get its dimensions, put all its data in data structures
+-create starting points for the triangles within the dimensions of the image
+-blot the triangles to the screen
+-randomly move the triangles, forming a generation of x number of children of the original
+-compare triangles to reference image, the one that matches most closely is selected as next parent
+-blot the triangles to the screen
+-repeat randomly moving, forming generation etc.
+-once difference between the triangles and reference image is sufficiently low then save the triangle image.

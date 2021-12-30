@@ -1,0 +1,1 @@
+/bin/x86_64-linux-gnu-gcc-9 -g  -rdynamic CMakeFiles/Image_triangles.dir/main.c.o CMakeFiles/Image_triangles.dir/image_data.c.o CMakeFiles/Image_triangles.dir/triangle_data.c.o  -o Image_triangles  -lSDL2 -lSDL2_image -lm -lSDL2_gfx 
