@@ -4,8 +4,13 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2_gfxPrimitives.h>
 #include <string.h>
+#include <math.h>
+#include <time.h>
 #include "image_data.h"
 #include "triangle_data.h"
+
+#define N_CHILDREN 500
+#define TIME_BETWEEN_ITERATIONS 0
 
 //Screen dimension constants
 int SCREEN_WIDTH = 640;
@@ -384,26 +389,40 @@ int draw_array_triangle(SDL_Renderer * renderer, const Sint16 * vx, const Sint16
 }
 
 
-//'draws' all triangles in the triangles array and _positions array to the specified pixel array
+//'draws' all triangles in the _triangles array and _positions array to the specified pixel array
 //this requires the triangles array and the _positions array to be filled with valid data.
-void draw_array_triangles(SDL_Color *pixel_array, coordinate* _positions) {
+void draw_array_triangles(SDL_Color *pixel_array, coordinate* _positions, triangle *_triangles) {
 
 	int vx[3] = {0};
 	int vy[3] = {0};
 
+	//setting the pixel array to all black before drawing
+	for(int i = 0; i < SCREEN_WIDTH*SCREEN_HEIGHT; i++) {
+		pixel_array[i].r = 0;
+		pixel_array[i].g = 0;
+		pixel_array[i].b = 0;
+	}
+
 
 	for(int i = 0 ; i < n_triangles; i++) {
 
-		vx[0] = positions[triangles[i].p1].x;
-		vx[1] = positions[triangles[i].p2].x;
-		vx[2] = positions[triangles[i].p3].x;
+		//printf("_triangles[%i].p1 = %i\n", i, _triangles[i].p1);
+		//printf("_triangles[%i].p2 = %i\n", i, _triangles[i].p2);
+		//printf("_triangles[%i].p3 = %i\n", i, _triangles[i].p3);
 
-		vy[0] = positions[triangles[i].p1].y;
-		vy[1] = positions[triangles[i].p2].y;
-		vy[2] = positions[triangles[i].p3].y;
+		
 
 
-		draw_array_triangle(gRenderer, vx, vy, 3, triangles[i].c.r, triangles[i].c.g, triangles[i].c.b, triangles[i].c.a, NULL, NULL, pixel_array);
+		vx[0] = positions[_triangles[i].p1].x;
+		vx[1] = positions[_triangles[i].p2].x;
+		vx[2] = positions[_triangles[i].p3].x;
+
+		vy[0] = positions[_triangles[i].p1].y;
+		vy[1] = positions[_triangles[i].p2].y;
+		vy[2] = positions[_triangles[i].p3].y;
+
+
+		draw_array_triangle(gRenderer, vx, vy, 3, _triangles[i].c.r, _triangles[i].c.g, _triangles[i].c.b, _triangles[i].c.a, NULL, NULL, pixel_array);
 	}
 
 	return;
@@ -419,22 +438,210 @@ unsigned long get_difference_image_triangles(SDL_Color *pixel_array) {
 
 	for(int i = 0; i < SCREEN_WIDTH*SCREEN_HEIGHT; i++) {
 
+		/*
+		//using standard distance comparison
 		sum += (raw_image_data[i].r-pixel_array[i].r)*(raw_image_data[i].r-pixel_array[i].r);
 		sum += (raw_image_data[i].g-pixel_array[i].g)*(raw_image_data[i].g-pixel_array[i].g);
 		sum += (raw_image_data[i].b-pixel_array[i].b)*(raw_image_data[i].b-pixel_array[i].b);
+		*/
+
+		//using fancy formula found on wikipedia
+		//https://en.wikipedia.org/wiki/Color_difference
+		int delta_r_sq = (raw_image_data[i].r-pixel_array[i].r)*(raw_image_data[i].r-pixel_array[i].r);
+		int delta_g_sq = (raw_image_data[i].g-pixel_array[i].g)*(raw_image_data[i].g-pixel_array[i].g);
+		int delta_b_sq = (raw_image_data[i].b-pixel_array[i].b)*(raw_image_data[i].b-pixel_array[i].b);
+		int average_r = (raw_image_data[i].r + pixel_array[i].r)/2;
+
+		sum += (2.0 + ((float)average_r)/256.0)*delta_r_sq + 4*delta_g_sq + (2.0 + (255.0 - (float)average_r)/256.0)*delta_b_sq;
+
 
 	}
 
 	return sum;	
 }
 
-coordinate* generate_child(coordinate* _positions) {
-	
+//generates a random number between -max and max (inclusive)
+//example: if max = 5 this will generate {-5,5} inclusive
+int generate_random(int max) {
+
+	int num = rand() % (max+1);
+	if(rand() % 2)
+		num = -num;
+
+	return num;
+}
+
+//generates positions and colours for a child of the parent based on the parents coordinates and the parent_score and the triangles array
+//it stores these positions in the child_positions array and child_triangles
+//both the parent_positions and child_positions arrays are assumed to be N_POSITIONS in size and the child_triangles is assumed to be n_triangles in size
+void generate_child(coordinate *parent_positions, coordinate *child_positions, triangle *child_triangles, unsigned long parent_score) {
+
+	//the maximal amount of change in a single number for the child
+	int delta = 2*ceil(logl(parent_score/SCREEN_HEIGHT/SCREEN_WIDTH));
+
+	//generating new positions
+	for(int i = 0; i < N_POSITIONS; i++) {
+		//first check to see if positions actually need to be modified
+		if(parent_positions[i].x != 0 && parent_positions[i].x != SCREEN_WIDTH-1) {
+
+			//generate a new position
+			child_positions[i].x = (parent_positions[i].x+generate_random(delta));
+			//printf("child_positions[%i].x = %i\n", i, child_positions[i].x);
+
+			//make sure that it is within bounds
+			if(child_positions[i].x < 1)
+				child_positions[i].x = 1;
+			if(child_positions[i].x > SCREEN_WIDTH-2)
+				child_positions[i].x = SCREEN_WIDTH-2;
+
+		}
+		else {
+			//copy old position
+			child_positions[i].x = parent_positions[i].x;
+		}
+
+		if(parent_positions[i].y != 0 && parent_positions[i].y != SCREEN_HEIGHT-1) {
+
+			child_positions[i].y = (parent_positions[i].y+generate_random(delta));
+			//printf("child_positions[%i].y = %i\n", i, child_positions[i].y);
+
+			//make sure that it is within bounds.
+			if(child_positions[i].y < 1)
+				child_positions[i].y = 1;
+			if(child_positions[i].y > SCREEN_HEIGHT-2)
+				child_positions[i].y = SCREEN_HEIGHT-2;
+
+		}
+		else {
+			child_positions[i].y = parent_positions[i].y;
+		}
+	}
+
+
+
+	//generating new colours
+	for(int i = 0; i < n_triangles; i++) {
+
+		int red = triangles[i].c.r+generate_random(delta);
+		red = fmin(red, 255);
+		red = fmax(red, 0);
+		child_triangles[i].c.r = red;
+
+		int green = triangles[i].c.g+generate_random(delta);
+		green = fmin(green, 255);
+		green = fmax(green, 0);
+		child_triangles[i].c.g = green;
+
+		int blue = triangles[i].c.b+generate_random(delta);
+		blue = fmin(blue, 255);
+		blue = fmax(blue, 0);
+		child_triangles[i].c.b = blue;
+
+	}
+
+
+	return;
+
+}
+
+//stores the specified positions and triangles arrays in the specified positions and specified arrays
+//assumes that source_positions has size N_POSITIONS and source_triangles has size n_triangles
+//same for dest
+void copy_positions_triangles(coordinate *source_positions, triangle *source_triangles, coordinate *dest_positions, triangle *dest_triangles) {
+
+	memcpy(dest_positions, source_positions, N_POSITIONS*sizeof(coordinate));
+	memcpy(dest_triangles, source_triangles, n_triangles*sizeof(triangle));
+
+	return;
 }
 
 
+//from the current positions and triangles array this function will try to find the best child.
+//it will generate N_CHILDREN and find the one with the lowest error score
+//it will then store that child in the positions and triangles array
+//it also returns the score of that child
+unsigned long find_next_parent(unsigned long parent_score) {
+
+	//set the lowest score to the maximum value, makes for easy comparisons
+	unsigned long lowest_score = (unsigned long) -1;
+
+	//allocating stuff for children
+	coordinate *child_positions = malloc(N_POSITIONS*sizeof(coordinate));
+	triangle *child_triangles = malloc(n_triangles*sizeof(triangle));
+
+	//copying the configuration of the triangles from the parent because it is needed
+	//else the child_triangles does not contain the relations between the positions
+	memcpy(child_triangles, triangles, n_triangles*sizeof(triangle));
+
+
+	//allocating stuff for the best of the children
+	coordinate *best_child_positions = malloc(N_POSITIONS*sizeof(coordinate));
+	triangle *best_child_triangles = malloc(n_triangles*sizeof(triangle));
+
+	//pixel array for storing the pixels of a generated child
+	SDL_Color *pixel_array = malloc(SCREEN_WIDTH*SCREEN_HEIGHT*sizeof(SDL_Color));
+
+	//keep track of wether it found a better child than its parent
+	bool has_found_better_child = false;
+
+	for(int i = 0; i < N_CHILDREN; i++) {
+		//first generate a new child
+		generate_child(positions, child_positions, child_triangles, parent_score);
+		//then draw its pixels
+		draw_array_triangles(pixel_array, child_positions, child_triangles);
+		//then retrieve its score
+		unsigned long score = get_difference_image_triangles(pixel_array);
+		
+		//if this child is better than the current best child and better than the parent
+		if(score < lowest_score && score < parent_score) {
+			//copy the childs attributes to best child
+			copy_positions_triangles(child_positions, child_triangles, best_child_positions, best_child_triangles);
+			//set the new lowest score
+			lowest_score = score;
+			//we have found a better child
+			has_found_better_child = true;
+		}
+	}
+
+	//set the best child as the new parent
+	if(has_found_better_child) {
+		copy_positions_triangles(best_child_positions, best_child_triangles, positions, triangles);
+	}
+
+
+
+
+	free(child_positions);
+	free(child_triangles);
+	free(best_child_positions);
+	free(best_child_triangles);
+	free(pixel_array);
+	
+	
+	/*
+	if(has_found_better_child) {
+		return lowest_score;
+	}
+	else {
+		return parent_score;
+	}
+	*/
+	
+
+	return lowest_score;
+
+}
+
+//finds all neighbours for a given point
+//the order in which they are added to the data structure is also the right order for connecting the lines between points to form a polygon around the central point
+//https://stackoverflow.com/questions/16140831/how-to-find-the-polygon-enclosing-a-point-from-a-set-of-lines
+
 int main(int argc, char *args[])
 {
+
+	//initialize random seed
+	srand(time(NULL));
+
 
 	//Start up SDL
 	if (!init())
@@ -473,26 +680,32 @@ int main(int argc, char *args[])
 			gImageText = SDL_CreateTextureFromSurface(gRenderer, gImage);
 
 
+			char generated_file_name[128] = "Test_file"; 
+
 			//small section to test the generation of positions for triangles
 			if(!generate_positions()) {
 				return 1;
 			}
-			if(!write_positions_to_file("Test_file")) {
+			if(!write_positions_to_file(generated_file_name)) {
 				return 1;
 			}
-			if(!read_triangles_from_file("Test_file")) {
+			if(!generate_triangles_file(generated_file_name)) {
 				return 1;
 			}
+			if(!read_triangles_from_file(generated_file_name)) {
+				return 1;
+			}
+
 			generate_triangle_colours();
 
-			SDL_Color *data = (SDL_Color *)malloc(SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(SDL_Color));
+			SDL_Color *data = malloc(SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(SDL_Color));
 			if (data == NULL)
 			{
 				return 1;
 			}
 			
 
-			draw_array_triangles(data, positions);
+			draw_array_triangles(data, positions, triangles);
 
 			unsigned long difference = get_difference_image_triangles(data);
 
@@ -500,6 +713,8 @@ int main(int argc, char *args[])
 
 			free(data);
 
+
+			
 
 			//Main loop flag
 			bool quit = false;
@@ -536,13 +751,20 @@ int main(int argc, char *args[])
 				SDL_RenderCopy(gRenderer, gImageText, NULL, &stretchRect);
 
 
+
 				blit_triangles(gRenderer, positions);
 
 				//Update the surface
 				SDL_RenderPresent(gRenderer);
 
 
-				SDL_Delay(10);
+				SDL_Delay(TIME_BETWEEN_ITERATIONS);
+
+
+				//get the next iteration of the algorithm
+				difference = find_next_parent(difference);
+				printf("Difference between image and triangles: %lu\n", difference);
+
 			}
 		}
 	}

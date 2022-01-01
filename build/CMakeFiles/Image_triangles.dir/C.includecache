@@ -23,6 +23,10 @@ SDL2_gfxPrimitives.h
 -
 string.h
 -
+math.h
+-
+time.h
+-
 image_data.h
 /home/daan/Programming/Image_triangles/image_data.h
 triangle_data.h
