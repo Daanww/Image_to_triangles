@@ -1,4 +1,4 @@
-# Install script for directory: /home/daan/Programming/Image_triangles
+# Install script for directory: /home/daan/Documents/vscodeprojects/Image_to_triangles
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/daan/Programming/Image_triangles/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/daan/Documents/vscodeprojects/Image_to_triangles/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

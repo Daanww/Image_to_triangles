@@ -4,17 +4,17 @@
 
 
 # Configuration directories and files
-SourceDirectory: /home/daan/Programming/Image_triangles
-BuildDirectory: /home/daan/Programming/Image_triangles/build
+SourceDirectory: /home/daan/Documents/vscodeprojects/Image_to_triangles
+BuildDirectory: /home/daan/Documents/vscodeprojects/Image_to_triangles/build
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: daan-Lenovo-ideapad-330S-14IKB
+Site: daan-ubuntu-desktop
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
-BuildName: Linux-c++
+BuildName: Linux-x86_64-linux-gnu-g++-9
 
 # Subprojects
 LabelsForSubprojects: 
@@ -26,7 +26,7 @@ SubmitURL: http://
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/usr/bin/cmake" "/home/daan/Programming/Image_triangles"
+ConfigureCommand: "/usr/bin/cmake" "/home/daan/Documents/vscodeprojects/Image_to_triangles"
 MakeCommand: /usr/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 
@@ -62,7 +62,7 @@ UpdateOptions:
 UpdateType: git
 
 # Compiler info
-Compiler: /bin/c++
+Compiler: /bin/x86_64-linux-gnu-g++-9
 CompilerVersion: 9.3.0
 
 # Dynamic analysis (MemCheck)
@@ -71,7 +71,7 @@ ValgrindCommand:
 ValgrindCommandOptions: 
 MemoryCheckType: 
 MemoryCheckSanitizerOptions: 
-MemoryCheckCommand: MEMORYCHECK_COMMAND-NOTFOUND
+MemoryCheckCommand: /usr/bin/valgrind
 MemoryCheckCommandOptions: 
 MemoryCheckSuppressionFile: 
 

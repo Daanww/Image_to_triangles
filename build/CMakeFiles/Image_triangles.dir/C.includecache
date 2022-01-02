@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/daan/Programming/Image_triangles/image_data.h
+/home/daan/Documents/vscodeprojects/Image_to_triangles/image_data.h
 SDL2/SDL.h
 -
 
-/home/daan/Programming/Image_triangles/main.c
+/home/daan/Documents/vscodeprojects/Image_to_triangles/main.c
 stdio.h
 -
 stdbool.h
@@ -28,11 +28,11 @@ math.h
 time.h
 -
 image_data.h
-/home/daan/Programming/Image_triangles/image_data.h
+/home/daan/Documents/vscodeprojects/Image_to_triangles/image_data.h
 triangle_data.h
-/home/daan/Programming/Image_triangles/triangle_data.h
+/home/daan/Documents/vscodeprojects/Image_to_triangles/triangle_data.h
 
-/home/daan/Programming/Image_triangles/triangle_data.h
+/home/daan/Documents/vscodeprojects/Image_to_triangles/triangle_data.h
 SDL2/SDL.h
 -
 

@@ -4,7 +4,7 @@
 
 #include <SDL2/SDL.h>
 
-#define N_POSITIONS 10
+#define N_POSITIONS 20
 
 
 typedef struct Coordinate {

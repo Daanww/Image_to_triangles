@@ -220,7 +220,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Image_triangles::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Image_triangles-Debug-2a8b74a49177ce32c497.json",
+					"jsonFile" : "target-Image_triangles-Debug-c00358fd45dc2136abf9.json",
 					"name" : "Image_triangles",
 					"projectIndex" : 0
 				},
@@ -300,8 +300,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/daan/Programming/Image_triangles/build",
-		"source" : "/home/daan/Programming/Image_triangles"
+		"build" : "/home/daan/Documents/vscodeprojects/Image_to_triangles/build",
+		"source" : "/home/daan/Documents/vscodeprojects/Image_to_triangles"
 	},
 	"version" : 
 	{

@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/daan/Programming/Image_triangles/image_data.c" "/home/daan/Programming/Image_triangles/build/CMakeFiles/Image_triangles.dir/image_data.c.o"
-  "/home/daan/Programming/Image_triangles/main.c" "/home/daan/Programming/Image_triangles/build/CMakeFiles/Image_triangles.dir/main.c.o"
-  "/home/daan/Programming/Image_triangles/triangle_data.c" "/home/daan/Programming/Image_triangles/build/CMakeFiles/Image_triangles.dir/triangle_data.c.o"
+  "/home/daan/Documents/vscodeprojects/Image_to_triangles/image_data.c" "/home/daan/Documents/vscodeprojects/Image_to_triangles/build/CMakeFiles/Image_triangles.dir/image_data.c.o"
+  "/home/daan/Documents/vscodeprojects/Image_to_triangles/main.c" "/home/daan/Documents/vscodeprojects/Image_to_triangles/build/CMakeFiles/Image_triangles.dir/main.c.o"
+  "/home/daan/Documents/vscodeprojects/Image_to_triangles/triangle_data.c" "/home/daan/Documents/vscodeprojects/Image_to_triangles/build/CMakeFiles/Image_triangles.dir/triangle_data.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

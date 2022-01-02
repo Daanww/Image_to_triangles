@@ -5,7 +5,7 @@
 #include <SDL2_gfxPrimitives.h>
 //#include "triangle_data.h"
 
-#define N_POSITIONS 10
+#define N_POSITIONS 20
 #define EDGE_CUTOFF_PERCENTAGE 10
 
 typedef struct Coordinate

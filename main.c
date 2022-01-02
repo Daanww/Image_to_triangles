@@ -9,7 +9,7 @@
 #include "image_data.h"
 #include "triangle_data.h"
 
-#define N_CHILDREN 500
+#define N_CHILDREN 1000
 #define TIME_BETWEEN_ITERATIONS 0
 
 //Screen dimension constants
@@ -17,7 +17,7 @@ int SCREEN_WIDTH = 640;
 int SCREEN_HEIGHT = 480;
 
 //filepath to image
-const char file_path[] = "../Pink_elephant.jpeg";
+const char file_path[] = "../Test100x100.jpeg";
 
 //The window we'll be rendering to
 SDL_Window *gWindow = NULL;
@@ -92,14 +92,13 @@ bool createWindow(int x_modifier, int y_modifier)
 	{
 		printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 		success = false;
+		return success;
 	}
 	else
 	{
-		//Get window surface
-		gScreenSurface = SDL_GetWindowSurface(gWindow);
+		return success;		
 	}
 
-	return success;
 }
 
 bool loadMedia()
@@ -121,14 +120,13 @@ bool loadMedia()
 //loads the image and creates the window to hold it
 SDL_Surface *loadSurface()
 {
-	//The final optimized image
-	SDL_Surface *optimizedSurface = NULL;
-
+	
 	//Load image at specified path
 	SDL_Surface *loadedSurface = IMG_Load(file_path);
 	if (loadedSurface == NULL)
 	{
 		printf("Unable to load image %s! SDL Error: %s\n", file_path, SDL_GetError());
+		return NULL;
 	}
 	else
 	{
@@ -142,18 +140,10 @@ SDL_Surface *loadSurface()
 		}
 
 
-		//Convert surface to screen format
-		optimizedSurface = SDL_ConvertSurface(loadedSurface, gScreenSurface->format, 0);
-		if (optimizedSurface == NULL)
-		{
-			printf("Unable to optimize image %s! SDL Error: %s\n", file_path, SDL_GetError());
-		}
-
-		//Get rid of old loaded surface
-		SDL_FreeSurface(loadedSurface);
+		return loadedSurface;
+		
 	}
 
-	return optimizedSurface;
 }
 
 void close_sdl()
@@ -165,6 +155,10 @@ void close_sdl()
 	//Destroy window
 	SDL_DestroyWindow(gWindow);
 	gWindow = NULL;
+
+	//destroy renderer
+	SDL_DestroyRenderer(gRenderer);
+	gRenderer = NULL;
 
 	// unload the dynamically loaded image libraries
 	IMG_Quit();
@@ -393,8 +387,8 @@ int draw_array_triangle(SDL_Renderer * renderer, const Sint16 * vx, const Sint16
 //this requires the triangles array and the _positions array to be filled with valid data.
 void draw_array_triangles(SDL_Color *pixel_array, coordinate* _positions, triangle *_triangles) {
 
-	int vx[3] = {0};
-	int vy[3] = {0};
+	short int vx[3] = {0};
+	short int vy[3] = {0};
 
 	//setting the pixel array to all black before drawing
 	for(int i = 0; i < SCREEN_WIDTH*SCREEN_HEIGHT; i++) {
@@ -438,13 +432,14 @@ unsigned long get_difference_image_triangles(SDL_Color *pixel_array) {
 
 	for(int i = 0; i < SCREEN_WIDTH*SCREEN_HEIGHT; i++) {
 
-		/*
+		
 		//using standard distance comparison
 		sum += (raw_image_data[i].r-pixel_array[i].r)*(raw_image_data[i].r-pixel_array[i].r);
 		sum += (raw_image_data[i].g-pixel_array[i].g)*(raw_image_data[i].g-pixel_array[i].g);
 		sum += (raw_image_data[i].b-pixel_array[i].b)*(raw_image_data[i].b-pixel_array[i].b);
-		*/
+		
 
+		/*
 		//using fancy formula found on wikipedia
 		//https://en.wikipedia.org/wiki/Color_difference
 		int delta_r_sq = (raw_image_data[i].r-pixel_array[i].r)*(raw_image_data[i].r-pixel_array[i].r);
@@ -453,7 +448,7 @@ unsigned long get_difference_image_triangles(SDL_Color *pixel_array) {
 		int average_r = (raw_image_data[i].r + pixel_array[i].r)/2;
 
 		sum += (2.0 + ((float)average_r)/256.0)*delta_r_sq + 4*delta_g_sq + (2.0 + (255.0 - (float)average_r)/256.0)*delta_b_sq;
-
+		*/
 
 	}
 
@@ -478,6 +473,10 @@ void generate_child(coordinate *parent_positions, coordinate *child_positions, t
 
 	//the maximal amount of change in a single number for the child
 	int delta = 2*ceil(logl(parent_score/SCREEN_HEIGHT/SCREEN_WIDTH));
+	
+	//make sure that if the previous score was 
+	if(parent_score == (unsigned long)-1)
+		delta = delta/2;
 
 	//generating new positions
 	for(int i = 0; i < N_POSITIONS; i++) {
@@ -523,18 +522,18 @@ void generate_child(coordinate *parent_positions, coordinate *child_positions, t
 	for(int i = 0; i < n_triangles; i++) {
 
 		int red = triangles[i].c.r+generate_random(delta);
-		red = fmin(red, 255);
-		red = fmax(red, 0);
+		red = (red > 255) ? 255 : red;
+		red = (red < 0) ? 0 : red;
 		child_triangles[i].c.r = red;
 
 		int green = triangles[i].c.g+generate_random(delta);
-		green = fmin(green, 255);
-		green = fmax(green, 0);
+		green = (green > 255) ? 255 : green;
+		green = (green < 0) ? 0 : green;
 		child_triangles[i].c.g = green;
 
 		int blue = triangles[i].c.b+generate_random(delta);
-		blue = fmin(blue, 255);
-		blue = fmax(blue, 0);
+		blue = (blue > 255) ? 255 : blue;
+		blue = (blue < 0) ? 0 : blue;
 		child_triangles[i].c.b = blue;
 
 	}
@@ -617,8 +616,8 @@ unsigned long find_next_parent(unsigned long parent_score) {
 	free(best_child_triangles);
 	free(pixel_array);
 	
-	
 	/*
+	
 	if(has_found_better_child) {
 		return lowest_score;
 	}
@@ -664,11 +663,6 @@ int main(int argc, char *args[])
 			printf("pitch = %i\n", image_pitch);
 
 
-			int mouse_x = 0;
-			int mouse_y = 0;
-			int pixel_index = 0;
-			SDL_Color colour = find_image_data(gImage, pixel_index);
-
 			if(!allocate_image_data()) {
 				printf("Could not allocate memory for raw_image_data!\n");
 				return 1;
@@ -676,9 +670,10 @@ int main(int argc, char *args[])
 
 			copy_image_data(gImage);
 
+			
 			gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
 			gImageText = SDL_CreateTextureFromSurface(gRenderer, gImage);
-
+			
 
 			char generated_file_name[128] = "Test_file"; 
 
@@ -734,11 +729,6 @@ int main(int argc, char *args[])
 						quit = true;
 					}
 				}
-
-				SDL_GetMouseState(&mouse_x, &mouse_y);
-				pixel_index = SCREEN_WIDTH*mouse_y + mouse_x;
-				//colour = find_image_data(gImage, pixel_index);
-				colour = raw_image_data[pixel_index];
 
 
 

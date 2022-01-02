@@ -1,17 +1,17 @@
 [
 {
-  "directory": "/home/daan/Programming/Image_triangles/build",
-  "command": "/bin/x86_64-linux-gnu-gcc-9  -I/usr/include/SDL2  -g   -pedantic -Wall -o CMakeFiles/Image_triangles.dir/main.c.o   -c /home/daan/Programming/Image_triangles/main.c",
-  "file": "/home/daan/Programming/Image_triangles/main.c"
+  "directory": "/home/daan/Documents/vscodeprojects/Image_to_triangles/build",
+  "command": "/bin/x86_64-linux-gnu-gcc-9  -I/usr/include/SDL2  -g   -pedantic -Wall -O2 -o CMakeFiles/Image_triangles.dir/main.c.o   -c /home/daan/Documents/vscodeprojects/Image_to_triangles/main.c",
+  "file": "/home/daan/Documents/vscodeprojects/Image_to_triangles/main.c"
 },
 {
-  "directory": "/home/daan/Programming/Image_triangles/build",
-  "command": "/bin/x86_64-linux-gnu-gcc-9  -I/usr/include/SDL2  -g   -pedantic -Wall -o CMakeFiles/Image_triangles.dir/image_data.c.o   -c /home/daan/Programming/Image_triangles/image_data.c",
-  "file": "/home/daan/Programming/Image_triangles/image_data.c"
+  "directory": "/home/daan/Documents/vscodeprojects/Image_to_triangles/build",
+  "command": "/bin/x86_64-linux-gnu-gcc-9  -I/usr/include/SDL2  -g   -pedantic -Wall -O2 -o CMakeFiles/Image_triangles.dir/image_data.c.o   -c /home/daan/Documents/vscodeprojects/Image_to_triangles/image_data.c",
+  "file": "/home/daan/Documents/vscodeprojects/Image_to_triangles/image_data.c"
 },
 {
-  "directory": "/home/daan/Programming/Image_triangles/build",
-  "command": "/bin/x86_64-linux-gnu-gcc-9  -I/usr/include/SDL2  -g   -pedantic -Wall -o CMakeFiles/Image_triangles.dir/triangle_data.c.o   -c /home/daan/Programming/Image_triangles/triangle_data.c",
-  "file": "/home/daan/Programming/Image_triangles/triangle_data.c"
+  "directory": "/home/daan/Documents/vscodeprojects/Image_to_triangles/build",
+  "command": "/bin/x86_64-linux-gnu-gcc-9  -I/usr/include/SDL2  -g   -pedantic -Wall -O2 -o CMakeFiles/Image_triangles.dir/triangle_data.c.o   -c /home/daan/Documents/vscodeprojects/Image_to_triangles/triangle_data.c",
+  "file": "/home/daan/Documents/vscodeprojects/Image_to_triangles/triangle_data.c"
 }
 ]

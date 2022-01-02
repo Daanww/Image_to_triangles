@@ -58,6 +58,10 @@
 				{
 					"backtrace" : 2,
 					"fragment" : "-Wall"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-O2"
 				}
 			],
 			"includes" : 

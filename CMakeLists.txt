@@ -13,7 +13,7 @@ include_directories(${SDL2_INCLUDE_DIRS})
 add_executable(Image_triangles main.c image_data.h image_data.c triangle_data.h triangle_data.c)
 target_link_libraries(Image_triangles ${SDL2_LIBRARIES} SDL2_image m SDL2_gfx)
 
-target_compile_options(Image_triangles PUBLIC -pedantic -Wall )
+target_compile_options(Image_triangles PUBLIC -pedantic -Wall -O2)
 
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

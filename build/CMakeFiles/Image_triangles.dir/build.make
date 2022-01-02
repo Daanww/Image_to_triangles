@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/daan/Programming/Image_triangles
+CMAKE_SOURCE_DIR = /home/daan/Documents/vscodeprojects/Image_to_triangles
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/daan/Programming/Image_triangles/build
+CMAKE_BINARY_DIR = /home/daan/Documents/vscodeprojects/Image_to_triangles/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Image_triangles.dir/depend.make
@@ -59,42 +59,42 @@ include CMakeFiles/Image_triangles.dir/flags.make
 
 CMakeFiles/Image_triangles.dir/main.c.o: CMakeFiles/Image_triangles.dir/flags.make
 CMakeFiles/Image_triangles.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/daan/Programming/Image_triangles/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Image_triangles.dir/main.c.o"
-	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Image_triangles.dir/main.c.o   -c /home/daan/Programming/Image_triangles/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/daan/Documents/vscodeprojects/Image_to_triangles/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Image_triangles.dir/main.c.o"
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Image_triangles.dir/main.c.o   -c /home/daan/Documents/vscodeprojects/Image_to_triangles/main.c
 
 CMakeFiles/Image_triangles.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Image_triangles.dir/main.c.i"
-	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/daan/Programming/Image_triangles/main.c > CMakeFiles/Image_triangles.dir/main.c.i
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/daan/Documents/vscodeprojects/Image_to_triangles/main.c > CMakeFiles/Image_triangles.dir/main.c.i
 
 CMakeFiles/Image_triangles.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Image_triangles.dir/main.c.s"
-	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/daan/Programming/Image_triangles/main.c -o CMakeFiles/Image_triangles.dir/main.c.s
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/daan/Documents/vscodeprojects/Image_to_triangles/main.c -o CMakeFiles/Image_triangles.dir/main.c.s
 
 CMakeFiles/Image_triangles.dir/image_data.c.o: CMakeFiles/Image_triangles.dir/flags.make
 CMakeFiles/Image_triangles.dir/image_data.c.o: ../image_data.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/daan/Programming/Image_triangles/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Image_triangles.dir/image_data.c.o"
-	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Image_triangles.dir/image_data.c.o   -c /home/daan/Programming/Image_triangles/image_data.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/daan/Documents/vscodeprojects/Image_to_triangles/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/Image_triangles.dir/image_data.c.o"
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Image_triangles.dir/image_data.c.o   -c /home/daan/Documents/vscodeprojects/Image_to_triangles/image_data.c
 
 CMakeFiles/Image_triangles.dir/image_data.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Image_triangles.dir/image_data.c.i"
-	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/daan/Programming/Image_triangles/image_data.c > CMakeFiles/Image_triangles.dir/image_data.c.i
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/daan/Documents/vscodeprojects/Image_to_triangles/image_data.c > CMakeFiles/Image_triangles.dir/image_data.c.i
 
 CMakeFiles/Image_triangles.dir/image_data.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Image_triangles.dir/image_data.c.s"
-	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/daan/Programming/Image_triangles/image_data.c -o CMakeFiles/Image_triangles.dir/image_data.c.s
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/daan/Documents/vscodeprojects/Image_to_triangles/image_data.c -o CMakeFiles/Image_triangles.dir/image_data.c.s
 
 CMakeFiles/Image_triangles.dir/triangle_data.c.o: CMakeFiles/Image_triangles.dir/flags.make
 CMakeFiles/Image_triangles.dir/triangle_data.c.o: ../triangle_data.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/daan/Programming/Image_triangles/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Image_triangles.dir/triangle_data.c.o"
-	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Image_triangles.dir/triangle_data.c.o   -c /home/daan/Programming/Image_triangles/triangle_data.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/daan/Documents/vscodeprojects/Image_to_triangles/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/Image_triangles.dir/triangle_data.c.o"
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Image_triangles.dir/triangle_data.c.o   -c /home/daan/Documents/vscodeprojects/Image_to_triangles/triangle_data.c
 
 CMakeFiles/Image_triangles.dir/triangle_data.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Image_triangles.dir/triangle_data.c.i"
-	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/daan/Programming/Image_triangles/triangle_data.c > CMakeFiles/Image_triangles.dir/triangle_data.c.i
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/daan/Documents/vscodeprojects/Image_to_triangles/triangle_data.c > CMakeFiles/Image_triangles.dir/triangle_data.c.i
 
 CMakeFiles/Image_triangles.dir/triangle_data.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Image_triangles.dir/triangle_data.c.s"
-	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/daan/Programming/Image_triangles/triangle_data.c -o CMakeFiles/Image_triangles.dir/triangle_data.c.s
+	/bin/x86_64-linux-gnu-gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/daan/Documents/vscodeprojects/Image_to_triangles/triangle_data.c -o CMakeFiles/Image_triangles.dir/triangle_data.c.s
 
 # Object files for target Image_triangles
 Image_triangles_OBJECTS = \
@@ -110,7 +110,7 @@ Image_triangles: CMakeFiles/Image_triangles.dir/image_data.c.o
 Image_triangles: CMakeFiles/Image_triangles.dir/triangle_data.c.o
 Image_triangles: CMakeFiles/Image_triangles.dir/build.make
 Image_triangles: CMakeFiles/Image_triangles.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/daan/Programming/Image_triangles/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable Image_triangles"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/daan/Documents/vscodeprojects/Image_to_triangles/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable Image_triangles"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Image_triangles.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -123,6 +123,6 @@ CMakeFiles/Image_triangles.dir/clean:
 .PHONY : CMakeFiles/Image_triangles.dir/clean
 
 CMakeFiles/Image_triangles.dir/depend:
-	cd /home/daan/Programming/Image_triangles/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/daan/Programming/Image_triangles /home/daan/Programming/Image_triangles /home/daan/Programming/Image_triangles/build /home/daan/Programming/Image_triangles/build /home/daan/Programming/Image_triangles/build/CMakeFiles/Image_triangles.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/daan/Documents/vscodeprojects/Image_to_triangles/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/daan/Documents/vscodeprojects/Image_to_triangles /home/daan/Documents/vscodeprojects/Image_to_triangles /home/daan/Documents/vscodeprojects/Image_to_triangles/build /home/daan/Documents/vscodeprojects/Image_to_triangles/build /home/daan/Documents/vscodeprojects/Image_to_triangles/build/CMakeFiles/Image_triangles.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Image_triangles.dir/depend
 
